@@ -1,47 +1,48 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
-import { CanceledError } from "axios";
+import useData from "./useData";
 
-interface Genre{
+export interface Genre{
     id:number;
     name:string;
 }
 
 
 
-interface FetchGeneresResponse{
-    count:number;
-    results:Genre[];
-}
+// interface FetchGeneresResponse{
+//     count:number;
+//     results:Genre[];
+// }
 
-const useGeneres=()=>{
+// const useGeneres=()=>{
 
 
     
-    const [genres, setGeneres] = useState<Genre[]>([]);
-    const [error, setError] = useState("");
-    const [isLoading, setLoading]=useState(false);
-    useEffect(() => {
+//     const [genres, setGeneres] = useState<Genre[]>([]);
+//     const [error, setError] = useState("");
+//     const [isLoading, setLoading]=useState(false);
+//     useEffect(() => {
 
-        const controller = new AbortController();
-    setLoading(true);
-      apiClient
-        .get<FetchGeneresResponse>("/genres",{signal: controller.signal})
-        .then((res) => {
-            setGeneres(res.data.results); 
-            setLoading(false);
-        })
-        .catch((err) => {
-            if (err instanceof CanceledError) return;
-            setError(err.message)});
-            setLoading(false);
-    return ()=>controller.abort();
-    },[]);
+//         const controller = new AbortController();
+//     setLoading(true);
+//       apiClient
+//         .get<FetchGeneresResponse>("/genres",{signal: controller.signal})
+//         .then((res) => {
+//             setGeneres(res.data.results); 
+//             setLoading(false);
+//         })
+//         .catch((err) => {
+//             if (err instanceof CanceledError) return;
+//             setError(err.message)});
+//             setLoading(false);
+//     return ()=>controller.abort();
+//     },[]);
     
   
-return {genres,error, isLoading};
+// return {genres,error, isLoading};
 
 
-};
+// };
+
+
+const useGeneres=()=>useData<Genre>('/genres')
 
 export default useGeneres;
