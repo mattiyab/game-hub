@@ -44,6 +44,6 @@ export interface Genre{
 // };
 
 
-const useGeneres=()=>useData<Genre>('/genres')
+const useGenres=()=>useData<Genre>('/genres');
 
-export default useGeneres;
+export default useGenres;
